@@ -3,7 +3,7 @@ import { SessionCollection } from "../db/models/sessions";
 import { UserCollection } from "../db/models/users";
 
 export const authenticate = async(req,res,next)=>{
-    const authHeader = req.get("Authorization")
+    const authHeader = req.get("Authorization");
     if(!authHeader){
         next(createHttpError(401,"Please provide authorization header"));
         return;
@@ -16,7 +16,7 @@ export const authenticate = async(req,res,next)=>{
         return;
     }
 
-    const session = await SessionsCollection.findOne({ accessToken: token });
+    const session = await SessionCollection.findOne({ accessToken: token });
     if (!session) {
         next(createHttpError(401, 'Session not found'));
         return;
@@ -29,7 +29,7 @@ export const authenticate = async(req,res,next)=>{
     next(createHttpError(401, 'Access token expired'));
   }
 
-  const user = await UsersCollection.findById(session.userId);
+  const user = await UserCollection.findById(session.userId);
 
   if (!user) {
     next(createHttpError(401));
