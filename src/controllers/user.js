@@ -14,7 +14,8 @@ export const getDailyRateController = (req, res, next) => {
   });
 
   res.status(200).json({
-    status: 'success',
+    status: 200,
+    message: 'successfully got daily rate!',
     data: { dailyRate },
   });
 };
