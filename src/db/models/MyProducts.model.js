@@ -1,5 +1,6 @@
-const { Schema, model } = require('mongoose');
-const myProductSchema = new Schema({
+import mongoose from 'mongoose';
+
+const myProductSchema = new mongoose.Schema({
   productInfo: [
     {
       productWeight: {
@@ -19,10 +20,11 @@ const myProductSchema = new Schema({
     required: [true, 'Date is required'],
   },
   owner: {
-    type: Schema.Types.ObjectId,
-    required: true,
+    type: mongoose.Schema.Types.ObjectId,
+    required: false, //  Test için required=false yaptık, sonra true'ya alabiliriz.
     ref: 'user',
   },
 });
-const MyProducts = model('myproducts', myProductSchema);
-module.exports = { MyProducts };
+
+const MyProducts = mongoose.model('myproducts', myProductSchema);
+export { MyProducts };

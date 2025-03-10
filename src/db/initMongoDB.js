@@ -1,22 +1,16 @@
-// src/db/initMongoDB.js
-
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
 
-import { env } from '../utils/env.js';
+dotenv.config();
 
-export const initMongoDB = async () => {
+const connectDB = async () => {
   try {
-    const user = env('MONGODB_USER');
-    const pwd = env('MONGODB_PASSWORD');
-    const url = env('MONGODB_URL');
-    const db = env('MONGODB_DB');
-
-    await mongoose.connect(
-      `mongodb+srv://${user}:${pwd}@${url}/${db}?retryWrites=true&w=majority`,
-    );
-    console.log('Mongo connection successfully established!');
-  } catch (e) {
-    console.log('Error while setting up mongo connection', e);
-    throw e;
+    await mongoose.connect(process.env.MONGODB_URL);
+    console.log(" MongoDB'ye başarıyla bağlandı!");
+  } catch (error) {
+    console.error(' MongoDB bağlantı hatası:', error.message);
+    process.exit(1);
   }
 };
+
+export default connectDB;
