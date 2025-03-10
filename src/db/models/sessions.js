@@ -30,3 +30,4 @@ const sessionSchema = new Schema({
 
 
 export const SessionCollection = model('sessions',sessionSchema);
+export default SessionCollection;

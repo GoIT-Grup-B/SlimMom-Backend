@@ -1,7 +1,7 @@
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import express from 'express';
-import router from './routers/index.js';
+import authRouter from './routers/auth.js';
 import { env } from './utils/env.js';
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
 import { errorHandler } from './middlewares/errorHandler.js';
@@ -15,7 +15,7 @@ export const startServer = () => {
 
   app.use(express.json());
   app.use(cookieParser());
-  app.use(router);
+  app.use('/',authRouter);
   app.use('*', ctrlWrapper(notFoundHandler));
   app.use(errorHandler);
 
