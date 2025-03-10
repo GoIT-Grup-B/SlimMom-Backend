@@ -18,7 +18,13 @@ export const registerUserController = async(req, res, next)=>{
         res.status(201).json({
             status:201,
             message: "Successfully registered a user!",
-            data: userwithoutpass
+            data: {
+                id: userwithoutpass._doc._id,
+                name: userwithoutpass._doc.name,
+                email: userwithoutpass._doc.email,
+                createdAt: userwithoutpass._doc.createdAt,
+                updatedAt: userwithoutpass._doc.updatedAt,
+            }
         });
         
     }catch(error){
