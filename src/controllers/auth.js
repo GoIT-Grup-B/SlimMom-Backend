@@ -5,12 +5,13 @@ export const registerUserController = async(req, res, next)=>{
     try{
         const {name, email, password} = req.body;
         const user = await getUser(email);
-        console.log(user);
+
         if(user){
             return next(createHttpError(409,'Email in use'));
         }
 
         const newUser = await registerUser({name, email, password});
+        console.log(newUser);
         const userwithoutpass = {...newUser};
         delete userwithoutpass.password;
 

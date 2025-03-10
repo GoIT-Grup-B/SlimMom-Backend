@@ -5,10 +5,9 @@ import createHttpError from 'http-errors';
 
 export const registerUser = async (payload) => {
   try{
-    const user = UserCollection.findOne({ email: payload.email });
+    const user = await UserCollection.findOne({ email: payload.email });
     if (user) throw createHttpError(409, 'email in use');
-  console.log(user);
-    const encryptedPassword = bcrypt.hash(payload.password, 10);
+    const encryptedPassword = await bcrypt.hash(payload.password, 10);
     const createdUser =  await UserCollection.create({
       ...payload,
       password: encryptedPassword,
