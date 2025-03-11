@@ -7,8 +7,8 @@ import { loginUserSchema } from '../validation/auth.js';
 
 const router = Router();
 
-router.post('/auth/register', validateBody(registerUserSchema), ctrlWrapper(registerUserController));
-router.post('/auth/login', validateBody(loginUserSchema),ctrlWrapper(loginUserController));
-router.post('/auth/refresh',ctrlWrapper(refreshUserController));
+router.post('/register', validateBody(registerUserSchema), ctrlWrapper(registerUserController));
+router.post('/login', validateBody(loginUserSchema),ctrlWrapper(loginUserController));
+router.post('/refresh',ctrlWrapper(refreshUserController));
 
 export default router;
