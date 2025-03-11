@@ -3,19 +3,19 @@ import { Schema, model } from 'mongoose';
 const productSchema = new Schema(
   {
     categories: {
-      type: string,
+      type: String,
       required: true,
     },
     weight: {
-      type: number,
+      type: Number,
       required: true,
     },
     title: {
-      type: string,
+      type: String,
       required: true,
     },
     calories: {
-      type: number,
+      type: Number,
       required: true,
     },
     groupBloodTypeNotAllowed: {
@@ -32,3 +32,5 @@ const productSchema = new Schema(
 );
 
 const Product = model('product', productSchema);
+
+export default Product;

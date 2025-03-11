@@ -1,4 +1,9 @@
-import { router } from 'express';
-import ctrlWrapper from '../utils/ctrlWrapper';
+import { Router } from 'express';
+import { ctrlWrapper } from '../utils/ctrlWrapper.js';
+import { getProductsByQuery } from '../controllers/products.js';
 
-router.get('/searchProducts', ctrlWrapper(getAllProductsByQuery));
+const router = Router();
+
+router.get('/searchProducts', ctrlWrapper(getProductsByQuery));
+
+export default router;
