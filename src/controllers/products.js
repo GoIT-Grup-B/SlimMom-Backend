@@ -1,10 +1,9 @@
 import Product from '../db/models/products.js';
 
 export async function getProductsByQuery(req, res, next) {
-  console.log('getProductsByQuery FUNCTION INVOKED');
-  let data = await Product.findOne({title:"ama"})
+  let data = await Product.find({ title: /ama/i });
   res.status(200).json({
-      message: 'geldi',
-      data: data
+    message: 'geldi',
+    data: data,
   });
 }
