@@ -17,5 +17,3 @@ export const initMongoDB = async () => {
     throw e;
   }
 };
-
-export default connectDB;
