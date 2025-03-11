@@ -14,8 +14,6 @@ export const startServer = () => {
   app.use(cors());
   app.use(cookieParser());
 
-  app.use('/api/myproducts', myProductsRouter);
-
   const PORT = process.env.PORT || 3000;
 
   mongoose

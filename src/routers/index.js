@@ -2,7 +2,7 @@ import authRouter from './user.js';
 import { Router } from 'express';
 
 const router = Router();
-
-router.use('/auth',authRouter);
+app.use('/api/myproducts', myProductsRouter);
+router.use('/auth', authRouter);
 
 export default router;

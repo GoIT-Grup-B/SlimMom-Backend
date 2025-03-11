@@ -4,10 +4,10 @@ const myProductSchema = new mongoose.Schema({
   productInfo: [
     {
       productWeight: {
-        type: String,
+        type: Number,
       },
       productCalories: {
-        type: String,
+        type: Number,
       },
       productName: {
         type: String,
@@ -16,7 +16,7 @@ const myProductSchema = new mongoose.Schema({
     },
   ],
   date: {
-    type: String,
+    type: Date,
     required: [true, 'Date is required'],
   },
   owner: {
