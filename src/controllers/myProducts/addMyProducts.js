@@ -3,6 +3,8 @@ import { MyProducts } from '../../db/models/MyProducts.model.js';
 const addMyProducts = async (req, res) => {
   try {
     const { productName, productWeight, productCalories, date } = req.body;
+    const newDate = new Date(date);
+    const dateFormatted = newDate.toISOString().split('T')[0];
 
     if (!productName || !productWeight || !productCalories || !date) {
       return res.status(400).json({ message: 'Tüm alanlar gereklidir!' });
@@ -16,7 +18,7 @@ const addMyProducts = async (req, res) => {
           productCalories,
         },
       ],
-      date,
+      date: dateFormatted,
     });
 
     await newProduct.save();

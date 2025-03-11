@@ -3,12 +3,14 @@ import { MyProducts } from '../../db/models/MyProducts.model.js';
 const countCalories = async (req, res) => {
   try {
     const { date } = req.query;
+    const newDate = new Date(date);
+    const dateFormatted = newDate.toISOString().split('T')[0];
 
     if (!date) {
       return res.status(400).json({ message: 'bir tarih belirtin!' });
     }
 
-    const products = await MyProducts.find({ date });
+    const products = await MyProducts.find({ date: dateFormatted });
 
     if (!products.length) {
       return res
