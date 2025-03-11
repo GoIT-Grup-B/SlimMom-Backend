@@ -1,4 +1,4 @@
-import { calculateDailyCalory } from '../utils/calculateCalory';
+import { calculateDailyCalory } from '../utils/calculateCalory.js';
 
 export const getDailyRateController = (req, res, next) => {
   const currentWeight = Number(req.body.currentWeight);
