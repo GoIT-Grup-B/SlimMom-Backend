@@ -5,7 +5,7 @@ import { getDailyRateSchema } from '../validation/user.js';
 
 const router = Router();
 
-router.get(
+router.post(
   '/daily-rate',
   validateBody(getDailyRateSchema),
   getDailyRateController,
