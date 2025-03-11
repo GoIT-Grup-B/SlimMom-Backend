@@ -1,15 +1,20 @@
 import mongoose from 'mongoose';
-import dotenv from 'dotenv';
 
-dotenv.config();
+import { env } from '../utils/env.js';
 
-const connectDB = async () => {
+export const initMongoDB = async () => {
   try {
-    await mongoose.connect(process.env.MONGODB_URL);
-    console.log(" MongoDB'ye başarıyla bağlandı!");
-  } catch (error) {
-    console.error(' MongoDB bağlantı hatası:', error.message);
-    process.exit(1);
+    const user = env('MONGODB_USER');
+    const pwd = env('MONGODB_PASSWORD');
+    const url = env('MONGODB_URL');
+
+    await mongoose.connect(
+      `mongodb+srv://${user}:${pwd}${url}/slim-mom?retryWrites=true&w=majority`,
+    );
+    console.log('Mongo connection successfully established!');
+  } catch (e) {
+    console.log('Error while setting up mongo connection', e);
+    throw e;
   }
 };
 

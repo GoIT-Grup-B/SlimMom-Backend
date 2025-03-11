@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "type": "module",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js"
@@ -12,19 +13,19 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
-    "nodemon": "^3.1.9",
     "@eslint/js": "^9.18.0",
     "eslint": "^9.18.0",
-    "globals": "^15.14.0"
+    "globals": "^15.14.0",
+    "nodemon": "^3.1.9"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
-    "dotenv": "^16.4.2",
+    "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "http-errors": "^2.0.0",
-    "mongoose": "^8.12.1",
-    "morgan": "^1.10.0"
+    "joi": "^17.13.3",
+    "mongoose": "^8.12.1"
   }
 }
