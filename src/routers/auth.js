@@ -11,5 +11,4 @@ router.post('/auth/register', validateBody(registerUserSchema), ctrlWrapper(regi
 router.post('/auth/login', validateBody(loginUserSchema),ctrlWrapper(loginUserController));
 router.post('/auth/refresh',ctrlWrapper(refreshUserController));
 
-
 export default router;
