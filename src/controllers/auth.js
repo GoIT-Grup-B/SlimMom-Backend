@@ -1,42 +1,87 @@
-import { registerUser } from '../services/auth.js';
-import createHttpError from 'http-errors';
-import { SessionCollection } from '../db/models/sessions.js';
+import {registerUser,getUser,loginUser,refreshUser} from '../services/auth.js';
+import createHttpError from "http-errors";
+import { ONE_DAY } from '../constants/index.js';
 
-export const registerUserController = async (req, res, next) => {
-  const user = await registerUser(req.body);
+export const registerUserController = async(req, res, next)=>{
+    try{
+        const {name, email, password} = req.body;
+        const user = await getUser(email);
 
-  res.status(200).json({
-    status: 200,
-    message: 'Successfully registered a user!',
-    data: user,
-  });
+        if(user){
+            return next(createHttpError(409,'Email in use'));
+        }
+
+        const newUser = await registerUser({name, email, password});
+        console.log(newUser);
+        const userwithoutpass = {...newUser};
+        delete userwithoutpass.password;
+
+        res.status(201).json({
+            status:201,
+            message: "Successfully registered a user!",
+            data: {
+                id: userwithoutpass._doc._id,
+                name: userwithoutpass._doc.name,
+                email: userwithoutpass._doc.email,
+                createdAt: userwithoutpass._doc.createdAt,
+                updatedAt: userwithoutpass._doc.updatedAt,
+            }
+        });
+        
+    }catch(error){
+        next(createHttpError(500,error));
+    }
 };
 
-export const logoutUserController = async (req, res, next) => {
-  try {
-    const authHeader = req.get('Authorization');
-    if (!authHeader) {
-      return next(createHttpError(401, 'Authorization header is missing'));
-    }
 
-    const token = authHeader.split(' ')[1];
-    if (!token) {
-      return next(createHttpError(401, 'Invalid token format'));
-    }
-
-    const session = await SessionCollection.findOne({ accessToken: token });
-    if (!session) {
-      return next(createHttpError(401, 'Session not found'));
-    }
-
-    await SessionCollection.deleteOne({ accessToken: token });
-
-    res.status(200).json({
-      status: 200,
-      message: 'User logged out successfully!',
+export const loginUserController =  async(req,res) =>{
+    const session = await loginUser(req.body);
+  
+    res.cookie('refreshToken', session.refreshToken, {
+      httpOnly: true,
+      expires: new Date(Date.now() + ONE_DAY),
     });
-  } catch (error) {
-    console.error('Logout Error:', error);
-    next(createHttpError(500, 'Server error'));
-  }
+    res.cookie('sessionId', session._id, {
+      httpOnly: true,
+      expires: new Date(Date.now() + ONE_DAY),
+    });
+  
+    res.json({
+      status: 200,
+      message: 'Successfully logged in an user!',
+      data: {
+        accessToken: session.accessToken,
+      },
+    });
+  };
+
+  const setupSession = (res, session) => {
+    res.cookie('refreshToken', session.refreshToken, {
+      httpOnly: true,
+      expires: new Date(Date.now() + ONE_DAY),
+    });
+    res.cookie('sessionId', session._id, {
+      httpOnly: true,
+      expires: new Date(Date.now() + ONE_DAY),
+    });
+  };
+export const refreshUserController = async(req,res,next) =>{
+    try{
+      const session = await refreshUser({
+        sessionId: req.cookies.sessionId,
+        refreshToken: req.cookies.refreshToken,
+      });
+      console.log(session);
+      console.log("Cookies:", req.cookies);
+     
+      setupSession(res, session);
+        res.status(200).json({
+            status: 200,
+            message:"Successfully refreshed a session!",
+            data:{ accessToken: session.accessToken,}
+
+        });
+    }catch(e){
+        next(createHttpError(e.status||500,e.message));
+    }
 };

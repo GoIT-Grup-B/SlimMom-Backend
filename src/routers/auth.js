@@ -1,18 +1,24 @@
 import { Router } from 'express';
+import ctrlWrapper from '../utils/ctrlWrapper.js';
+import validateBody from '../middlewares/validateBody.js';
+import { registerUserSchema, loginUserSchema } from '../validation/auth.js';
+import {
+  registerUserController,
+  loginUserController,
+} from '../controllers/auth.js';
 
-const authRouter = Router();
+const router = Router();
 
-authRouter.post('/register', (req, res) => {
-  const { name, email, password } = req.body;
+router.post(
+  '/register',
+  validateBody(registerUserSchema),
+  ctrlWrapper(registerUserController),
+);
 
-  if (!name || !email || !password) {
-    return res.status(400).json({ error: 'Lütfen tüm alanları doldurun!' });
-  }
+router.post(
+  '/login',
+  validateBody(loginUserSchema),
+  ctrlWrapper(loginUserController),
+);
 
-  res.status(201).json({
-    message: 'Kullanıcı başarıyla kaydedildi!',
-    user: { name, email },
-  });
-});
-
-export default authRouter;
+export default router;
