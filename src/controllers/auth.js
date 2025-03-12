@@ -91,20 +91,23 @@ export const refreshUserController = async (req, res, next) => {
 
 export const logoutUser = async (req, res, next) => {
   try {
-    const token = req.token; // authenticate middleware'den gelen token
+    const token = req.get('Authorization')?.split(' ')[1]; // Token'i al
+
     if (!token) {
       return res
         .status(401)
         .json({ message: 'Yetkilendirme hatası: Token bulunamadı' });
     }
 
-    const deletedSession = await SessionCollection.findOneAndDelete({
-      accessToken: token,
-    });
+    // Token'e bağlı session'ı bul
+    const session = await SessionCollection.findOne({ accessToken: token });
 
-    if (!deletedSession) {
-      return res.status(404).json({ message: 'Oturum bulunamadı' });
+    if (!session) {
+      return res.status(404).json({ message: 'Session not found' });
     }
+
+    // Oturumu sil
+    await SessionCollection.findByIdAndDelete(session._id);
 
     res.status(200).json({ message: 'Başarıyla çıkış yapıldı!' });
   } catch (error) {
