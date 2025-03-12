@@ -5,7 +5,7 @@ import productRouter from './product.js';
 
 const router = Router();
 
-router.use("/products", productRouter)
+router.use('/products', productRouter);
 router.use('/auth', authRouter);
 router.use('/user', userRouter);
 
