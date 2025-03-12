@@ -1,0 +1,36 @@
+# docs/openapi.yaml
+
+openapi: 3.1.0
+info:
+  version: 1.0.0
+  title: Slim Mom App
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  description: >
+    This is a documentation of slim mom app
+tags:
+  - name: Products
+    description: Operations about users.
+  - name: Auth
+    description: Auth operations.
+servers:
+  - url: http://localhost:3000
+  - url: https://example.com/api/v1
+paths:
+  /register:
+    post:
+      $ref: ../swagger/paths/auth/register/post.yaml
+      tags:
+        - Auth
+  /login:
+    post:
+      $ref: ../swagger/paths/auth/login/post.yaml
+      tags:
+        - Auth
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
