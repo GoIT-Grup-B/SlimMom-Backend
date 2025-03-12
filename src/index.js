@@ -7,4 +7,3 @@ const bootstrap = async () => {
 };
 
 bootstrap();
-startServer();
