@@ -1,7 +1,7 @@
 import {registerUser,getUser,loginUser,refreshUser} from '../services/auth.js';
 import createHttpError from "http-errors";
 import { ONE_DAY } from '../constants/index.js';
-
+import jwt from 'jsonwebtoken';
 export const registerUserController = async(req, res, next)=>{
     try{
         const {name, email, password} = req.body;
@@ -16,6 +16,8 @@ export const registerUserController = async(req, res, next)=>{
         const userwithoutpass = {...newUser};
         delete userwithoutpass.password;
 
+        const token = jwt.sign({id:newUser._id},process.env.JWT_SECRET, { expiresIn: '7d' });
+
         res.status(201).json({
             status:201,
             message: "Successfully registered a user!",
@@ -25,7 +27,8 @@ export const registerUserController = async(req, res, next)=>{
                 email: userwithoutpass._doc.email,
                 createdAt: userwithoutpass._doc.createdAt,
                 updatedAt: userwithoutpass._doc.updatedAt,
-            }
+            },
+            token
         });
         
     }catch(error){
@@ -55,16 +58,17 @@ export const loginUserController =  async(req,res) =>{
     });
   };
 
-  const setupSession = (res, session) => {
-    res.cookie('refreshToken', session.refreshToken, {
-      httpOnly: true,
-      expires: new Date(Date.now() + ONE_DAY),
-    });
-    res.cookie('sessionId', session._id, {
-      httpOnly: true,
-      expires: new Date(Date.now() + ONE_DAY),
-    });
-  };
+const setupSession = (res, session) => {
+  res.cookie('refreshToken', session.refreshToken, {
+    httpOnly: true,
+    expires: new Date(Date.now() + ONE_DAY),
+  });
+  res.cookie('sessionId', session._id, {
+    httpOnly: true,
+    expires: new Date(Date.now() + ONE_DAY),
+  });
+};
+
 export const refreshUserController = async(req,res,next) =>{
     try{
       const session = await refreshUser({
