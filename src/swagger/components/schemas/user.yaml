@@ -13,10 +13,10 @@ properties:
     type: string
     example: 'John Doe'
   email:
-    description: "Student's name"
+    description: "Student's email"
     type: string
-    example: 'John Doe'
+    example: 'johndoe@gmail.com'
   password:
-    description: "Student's name"
+    description: "Student's password"
     type: string
-    example: 'John Doe'
+    example: '12345678'
