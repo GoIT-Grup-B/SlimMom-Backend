@@ -200,8 +200,8 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "id",
+            "in": "query",
+            "name": "title",
             "required": true,
             "schema": {
               "type": "string",
