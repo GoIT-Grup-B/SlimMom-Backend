@@ -1,4 +1,4 @@
-description: "Bad Request – The server cannot process the request due to client error."
+description: 'Bad Request – The server cannot process the request due to client error.'
 content:
   application/json:
     schema:
@@ -12,4 +12,4 @@ content:
           example: 400
         message:
           type: string
-          example: "Invalid request. Please check the provided data."
+          example: 'Invalid request. Please check the provided data.'

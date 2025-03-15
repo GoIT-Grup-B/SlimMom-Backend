@@ -23,7 +23,7 @@ router.post(
 
 router.get('/products', authenticate, ctrlWrapper(getMyProducts));
 router.delete('/products/:id', authenticate, ctrlWrapper(deleteMyProducts));
-router.get('/daily-calories', authenticate, ctrlWrapper(countCalories));
+router.get('/my-daily-calories', authenticate, ctrlWrapper(countCalories));
 
 router.get(
   '/my-daily-rate',
