@@ -1,5 +1,3 @@
-# docs/openapi.yaml
-
 openapi: 3.1.0
 info:
   version: 1.0.0
@@ -14,6 +12,8 @@ tags:
     description: Operations about products.
   - name: Auth
     description: Auth operations.
+  - name: Users
+    description: Operations about users and their products.
 servers:
   - url: http://localhost:3000
   - url: https://example.com/api/v1
@@ -33,6 +33,35 @@ paths:
       $ref: ../swagger/paths/products/get.yaml
       tags:
         - Products
+  /user/products:
+    post:
+      $ref: ../swagger/paths/user/products/post.yaml
+      tags:
+        - Users
+    get:
+      $ref: ../swagger/paths/user/products/get.yaml
+      tags:
+        - Users
+  /user/products/{productId}:
+    delete:
+      $ref: ../swagger/paths/user/products/delete.yaml
+      tags:
+        - Users
+  /user/my-daily-calories:
+    get:
+      $ref: '../swagger/paths/user/daily-calories.yaml'
+      tags:
+        - Users
+  /user/my-daily-rate:
+    get:
+      $ref: '../swagger/paths/user/my-daily-rate.yaml'
+      tags:
+        - Users
+  /user/daily-rate:
+    post:
+      $ref: '../swagger/paths/user/daily-rate.yaml'
+      tags:
+        - Users
 
 components:
   securitySchemes:
