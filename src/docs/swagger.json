@@ -112,7 +112,7 @@
         "tags": [
           "Auth"
         ],
-        "summary": "Autherization operations",
+        "summary": "Login user",
         "operationId": "login",
         "description": "Login user",
         "security": [
