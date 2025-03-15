@@ -1,19 +1,21 @@
+import createHttpError from 'http-errors';
 import { MyProducts } from '../../db/models/MyProducts.model.js';
+import mongoose from 'mongoose';
 
 const deleteMyProducts = async (req, res) => {
-  try {
-    const { id } = req.params;
+  const { id } = req.params;
+  const owner = req.user._id;
 
-    const deletedProduct = await MyProducts.findByIdAndDelete(id);
+  if (!mongoose.Types.ObjectId.isValid(id))
+    throw createHttpError(400, `Invalid ID: ${id}`);
 
-    if (!deletedProduct) {
-      return res.status(404).json({ message: 'Ürün bulunamadı!' });
-    }
+  const deletedProduct = await MyProducts.findOneAndDelete({ _id: id, owner });
 
-    res.status(200).json({ message: 'Ürün silindi!', deletedProduct });
-  } catch (error) {
-    res.status(500).json({ message: 'Sunucu hatası', error: error.message });
+  if (!deletedProduct) {
+    return res.status(404).json({ message: 'No product found with this id!' });
   }
+
+  res.status(204).json({ message: 'Product deleted!', deletedProduct });
 };
 
 export { deleteMyProducts };

@@ -1,39 +1,33 @@
-import { MyProducts } from '../../db/models/MyProducts.model.js';
+import createHttpError from 'http-errors';
+import { getProductsForDateService } from '../../services/user.js';
 
 const countCalories = async (req, res) => {
-  try {
-    const { date } = req.query;
-    const newDate = new Date(date);
-    const dateFormatted = newDate.toISOString().split('T')[0];
-
-    if (!date) {
-      return res.status(400).json({ message: 'bir tarih belirtin!' });
-    }
-
-    const products = await MyProducts.find({ date: dateFormatted });
-
-    if (!products.length) {
-      return res
-        .status(404)
-        .json({ message: 'Bu tarihte kayıtlı ürün bulunamadı!' });
-    }
-
-    const totalCalories = products.reduce((acc, product) => {
-      const productCalories = product.productInfo.reduce(
-        (sum, info) => sum + Number(info.productCalories),
-        0,
-      );
-      return acc + productCalories;
-    }, 0);
-
-    res.status(200).json({
-      message: 'Toplam kalori hesaplandı!',
-      date,
-      totalCalories,
-    });
-  } catch (error) {
-    res.status(500).json({ message: 'Sunucu hatası', error: error.message });
+  const { date } = req.query;
+  const owner = req.user._id;
+  if (!date || isNaN(Date.parse(date))) {
+    throw createHttpError(400, 'Invalid date!');
   }
+  const dateFormatted = new Date(date).toISOString().split('T')[0];
+
+  const products = await getProductsForDateService(owner, dateFormatted);
+
+  if (!products.length)
+    throw createHttpError(
+      404,
+      `No products found for this date! (${dateFormatted})`,
+    );
+
+  const totalCalories = products.reduce((acc, product) => {
+    const productCalories =
+      (product.productId.calories / 100) * product.productWeight;
+    return acc + productCalories;
+  }, 0);
+
+  res.status(200).json({
+    message: `Users total calory for ${dateFormatted} calculated successfully!`,
+    date,
+    totalCalories,
+  });
 };
 
 export { countCalories };
