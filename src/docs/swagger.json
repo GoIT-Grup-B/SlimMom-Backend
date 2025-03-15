@@ -20,7 +20,7 @@
   "tags": [
     {
       "name": "Products",
-      "description": "Operations about users."
+      "description": "Operations about products."
     },
     {
       "name": "Auth",
@@ -28,7 +28,7 @@
     }
   ],
   "paths": {
-    "/register": {
+    "/auth/register": {
       "post": {
         "tags": [
           "Auth"
@@ -107,7 +107,7 @@
         }
       }
     },
-    "/login": {
+    "/auth/login": {
       "post": {
         "tags": [
           "Auth"

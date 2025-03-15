@@ -11,7 +11,7 @@ info:
     This is a documentation of slim mom app
 tags:
   - name: Products
-    description: Operations about users.
+    description: Operations about products.
   - name: Auth
     description: Auth operations.
 servers:
