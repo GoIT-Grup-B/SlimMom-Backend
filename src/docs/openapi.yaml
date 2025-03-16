@@ -52,14 +52,14 @@ paths:
       $ref: '../swagger/paths/user/daily-calories.yaml'
       tags:
         - Users
-  /user/my-daily-rate:
+  /user/my-daily-calory-needs:
     get:
-      $ref: '../swagger/paths/user/my-daily-rate.yaml'
+      $ref: '../swagger/paths/user/my-daily-calory-needs.yaml'
       tags:
         - Users
-  /user/daily-rate:
+  /user/daily-calory-needs:
     post:
-      $ref: '../swagger/paths/user/daily-rate.yaml'
+      $ref: '../swagger/paths/user/daily-calory-needs.yaml'
       tags:
         - Users
 

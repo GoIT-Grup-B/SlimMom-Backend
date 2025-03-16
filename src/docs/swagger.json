@@ -523,13 +523,13 @@
         }
       }
     },
-    "/user/my-daily-rate": {
+    "/user/my-daily-calory-needs": {
       "get": {
         "tags": [
           "Users"
         ],
-        "summary": "Get user's daily calory needs per day",
-        "description": "This endpoint allows user to get calory needs per day",
+        "summary": "Get logged in user's daily calory needs per day",
+        "description": "This endpoint allows logged in user to get calory needs per day",
         "operationId": "getMyDailyRate",
         "security": [
           {
@@ -586,13 +586,13 @@
         }
       }
     },
-    "/user/daily-rate": {
+    "/user/daily-calory-needs": {
       "post": {
         "tags": [
           "Users"
         ],
-        "summary": "Get user's daily calory needs per day",
-        "description": "This endpoint allows user to get calory needs per day",
+        "summary": "Get user's daily calory needs per day for given informations",
+        "description": "This endpoint allows user to get calory needs per day for given informations",
         "operationId": "getDailyRate",
         "requestBody": {
           "required": true,
@@ -633,6 +633,7 @@
             }
           }
         },
+        "security": [],
         "responses": {
           "200": {
             "description": "User's calory needs per day",

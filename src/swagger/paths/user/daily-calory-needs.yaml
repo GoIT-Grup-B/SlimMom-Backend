@@ -1,7 +1,7 @@
 tags:
   - User
-summary: Get user's daily calory needs per day
-description: This endpoint allows user to get calory needs per day
+summary: Get user's daily calory needs per day for given informations
+description: This endpoint allows user to get calory needs per day for given informations
 operationId: getDailyRate
 requestBody:
   required: true
@@ -31,6 +31,7 @@ requestBody:
           bloodType:
             type: number
             example: 1
+security: []
 responses:
   '200':
     description: User's calory needs per day
