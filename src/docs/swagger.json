@@ -34,9 +34,7 @@
   "paths": {
     "/register": {
       "post": {
-        "tags": [
-          "Auth"
-        ],
+        "tags": ["Auth"],
         "summary": "Register a new user",
         "operationId": "register",
         "description": "Register user",
@@ -47,11 +45,7 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": [
-                  "name",
-                  "email",
-                  "password"
-                ],
+                "required": ["name", "email", "password"],
                 "properties": {
                   "name": {
                     "type": "string",
@@ -79,11 +73,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "status",
-                    "message",
-                    "data"
-                  ],
+                  "required": ["status", "message", "data"],
                   "properties": {
                     "status": {
                       "type": "integer",
@@ -113,9 +103,7 @@
     },
     "/login": {
       "post": {
-        "tags": [
-          "Auth"
-        ],
+        "tags": ["Auth"],
         "summary": "Autherization operations",
         "operationId": "login",
         "description": "Login user",
@@ -130,10 +118,7 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": [
-                  "email",
-                  "password"
-                ],
+                "required": ["email", "password"],
                 "properties": {
                   "email": {
                     "type": "string",
@@ -157,11 +142,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "status",
-                    "message",
-                    "data"
-                  ],
+                  "required": ["status", "message", "data"],
                   "properties": {
                     "status": {
                       "type": "integer",
@@ -191,9 +172,7 @@
     },
     "/products/searchProducts": {
       "get": {
-        "tags": [
-          "Products"
-        ],
+        "tags": ["Products"],
         "summary": "Get products by search query",
         "operationId": "getProducts",
         "description": "Get products by search query",
@@ -220,11 +199,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "status",
-                    "message",
-                    "data"
-                  ],
+                  "required": ["status", "message", "data"],
                   "properties": {
                     "status": {
                       "type": "integer",
@@ -251,9 +226,7 @@
     },
     "/user/products": {
       "post": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "summary": "Add a product to the user's daily",
         "operationId": "addProductToUsersDaily",
         "description": "Add a product to the user's daily",
@@ -268,11 +241,7 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": [
-                  "productId",
-                  "date",
-                  "productWeight"
-                ],
+                "required": ["productId", "date", "productWeight"],
                 "properties": {
                   "productId": {
                     "type": "date",
@@ -340,9 +309,7 @@
         }
       },
       "get": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "summary": "Get all products of the user for the selected date",
         "operationId": "getAllProductsOfUserForSelectedDate",
         "description": "Get all products of the user for the selected date",
@@ -419,9 +386,7 @@
     },
     "/user/products/{productId}": {
       "delete": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "summary": "Delete product by id for selected date",
         "description": "This endpoint allows user to delete product by id for selected date",
         "operationId": "deleteUserProduct",
@@ -458,9 +423,7 @@
     },
     "/user/my-daily-calories": {
       "get": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "summary": "Get user's daily calories by date",
         "description": "This endpoint allows user to get daily calories by date",
         "operationId": "getUserDailyCalories",
@@ -525,9 +488,7 @@
     },
     "/user/my-daily-calory-needs": {
       "get": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "summary": "Get logged in user's daily calory needs per day",
         "description": "This endpoint allows logged in user to get calory needs per day",
         "operationId": "getMyDailyRate",
@@ -568,10 +529,7 @@
                           "items": {
                             "type": "string"
                           },
-                          "example": [
-                            "sugar",
-                            "salt"
-                          ]
+                          "example": ["sugar", "salt"]
                         }
                       }
                     }
@@ -588,9 +546,7 @@
     },
     "/user/daily-calory-needs": {
       "post": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "summary": "Get user's daily calory needs per day for given informations",
         "description": "This endpoint allows user to get calory needs per day for given informations",
         "operationId": "getDailyRate",
@@ -666,10 +622,7 @@
                           "items": {
                             "type": "string"
                           },
-                          "example": [
-                            "sugar",
-                            "salt"
-                          ]
+                          "example": ["sugar", "salt"]
                         }
                       }
                     }
@@ -695,11 +648,7 @@
     "schemas": {
       "user": {
         "type": "object",
-        "required": [
-          "name",
-          "email",
-          "password"
-        ],
+        "required": ["name", "email", "password"],
         "properties": {
           "_id": {
             "description": "Student's id",
@@ -773,10 +722,7 @@
           "application/json": {
             "schema": {
               "type": "object",
-              "required": [
-                "status",
-                "message"
-              ],
+              "required": ["status", "message"],
               "properties": {
                 "status": {
                   "type": "integer",
@@ -797,10 +743,7 @@
           "application/json": {
             "schema": {
               "type": "object",
-              "required": [
-                "message",
-                "data"
-              ],
+              "required": ["message", "data"],
               "properties": {
                 "message": {
                   "type": "string",
@@ -808,9 +751,7 @@
                 },
                 "data": {
                   "type": "object",
-                  "required": [
-                    "message"
-                  ],
+                  "required": ["message"],
                   "properties": {
                     "message": {
                       "type": "string",
@@ -829,11 +770,7 @@
           "application/json": {
             "schema": {
               "type": "object",
-              "required": [
-                "status",
-                "message",
-                "data"
-              ],
+              "required": ["status", "message", "data"],
               "properties": {
                 "status": {
                   "type": "integer",
@@ -845,9 +782,7 @@
                 },
                 "data": {
                   "type": "object",
-                  "required": [
-                    "message"
-                  ],
+                  "required": ["message"],
                   "properties": {
                     "message": {
                       "type": "string",
@@ -866,11 +801,7 @@
           "application/json": {
             "schema": {
               "type": "object",
-              "required": [
-                "status",
-                "message",
-                "data"
-              ],
+              "required": ["status", "message", "data"],
               "properties": {
                 "status": {
                   "type": "integer",
@@ -882,9 +813,7 @@
                 },
                 "data": {
                   "type": "object",
-                  "required": [
-                    "message"
-                  ],
+                  "required": ["message"],
                   "properties": {
                     "message": {
                       "type": "string",
