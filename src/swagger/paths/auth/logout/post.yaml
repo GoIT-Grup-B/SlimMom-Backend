@@ -4,7 +4,7 @@ summary: User Logout
 operationId: logout
 description: 'Clears authentication token from cookies and ends the user session.'
 security:
-  - BearerAuth: []
+  - bearerAuth: []
 responses:
   '200':
     description: 'Logout successful'
