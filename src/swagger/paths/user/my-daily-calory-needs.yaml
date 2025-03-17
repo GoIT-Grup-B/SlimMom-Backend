@@ -1,7 +1,7 @@
 tags:
   - User
-summary: Get user's daily calory needs per day
-description: This endpoint allows user to get calory needs per day
+summary: Get logged in user's daily calory needs per day
+description: This endpoint allows logged in user to get calory needs per day
 operationId: getMyDailyRate
 security:
   - bearerAuth: []

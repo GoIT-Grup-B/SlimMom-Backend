@@ -26,13 +26,13 @@ router.delete('/products/:id', authenticate, ctrlWrapper(deleteMyProducts));
 router.get('/my-daily-calories', authenticate, ctrlWrapper(countCalories));
 
 router.get(
-  '/my-daily-rate',
+  '/my-daily-calory-needs',
   authenticate,
   ctrlWrapper(getMyDailyRateController),
 );
 
 router.post(
-  '/daily-rate',
+  '/daily-calory-needs',
   validateBody(getDailyRateSchema),
   ctrlWrapper(getDailyRateController),
 );
