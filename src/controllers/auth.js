@@ -6,6 +6,7 @@ import {
 } from '../services/auth.js';
 import createHttpError from 'http-errors';
 import { ONE_DAY } from '../constants/index.js';
+import jwt from 'jsonwebtoken';
 import { SessionCollection } from '../db/models/sessions.js';
 
 export const registerUserController = async (req, res, next) => {
@@ -22,6 +23,10 @@ export const registerUserController = async (req, res, next) => {
     const userwithoutpass = { ...newUser };
     delete userwithoutpass.password;
 
+    const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, {
+      expiresIn: '7d',
+    });
+
     res.status(201).json({
       status: 201,
       message: 'Successfully registered a user!',
@@ -32,6 +37,7 @@ export const registerUserController = async (req, res, next) => {
         createdAt: userwithoutpass._doc.createdAt,
         updatedAt: userwithoutpass._doc.updatedAt,
       },
+      token,
     });
   } catch (error) {
     next(createHttpError(500, error));
@@ -69,6 +75,7 @@ const setupSession = (res, session) => {
     expires: new Date(Date.now() + ONE_DAY),
   });
 };
+
 export const refreshUserController = async (req, res, next) => {
   try {
     const session = await refreshUser({

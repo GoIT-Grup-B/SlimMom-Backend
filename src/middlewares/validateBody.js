@@ -6,7 +6,9 @@ export const validateBody = (schema) => (req, res, next) => {
     .then(() => next())
     .catch((e) => {
       const errorMessages = e.details.map((detail) => detail.message);
-      const error = createHttpError(400, "Validation error", { errors: errorMessages });
+      const error = createHttpError(400, 'Validation error', {
+        errors: errorMessages,
+      });
       next(error);
     });
 };
