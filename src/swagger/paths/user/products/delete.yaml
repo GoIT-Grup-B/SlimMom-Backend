@@ -2,6 +2,8 @@ tags:
   - User
 summary: Delete product by id for selected date
 description: This endpoint allows user to delete product by id for selected date
+security:
+  - bearerAuth: []
 operationId: deleteUserProduct
 parameters:
   - name: productId

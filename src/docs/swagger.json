@@ -11,10 +11,10 @@
   },
   "servers": [
     {
-      "url": "https://slimmom-backend-s8n8.onrender.com/"
+      "url": "https://slimmom-backend-s8n8.onrender.com"
     },
     {
-      "url": "https://localhost:3000/"
+      "url": "https://localhost:3000"
     }
   ],
   "tags": [
@@ -319,7 +319,7 @@
                 ],
                 "properties": {
                   "productId": {
-                    "type": "date",
+                    "type": "string",
                     "example": "67d5d211fa93b3b9e8962774"
                   },
                   "date": {
@@ -469,6 +469,11 @@
         "summary": "Delete product by id for selected date",
         "description": "This endpoint allows user to delete product by id for selected date",
         "operationId": "deleteUserProduct",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "parameters": [
           {
             "name": "productId",

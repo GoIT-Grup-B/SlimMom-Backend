@@ -17,7 +17,7 @@ requestBody:
           - productWeight
         properties:
           productId:
-            type: date
+            type: string
             example: 67d5d211fa93b3b9e8962774
           date:
             type: string
