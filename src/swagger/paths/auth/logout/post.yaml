@@ -1,29 +1,28 @@
-/logout:
-  post:
-    summary: 'User Logout'
-    description: 'Clears the authentication token from cookies.'
-    tags:
-      - Auth
-    security:
-      - BearerAuth: []
-    responses:
-      '200':
-        description: 'Logout successful'
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                message:
-                  type: string
-                  example: 'Logout successful'
-      '401':
-        description: 'Unauthorized - No token provided'
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                error:
-                  type: string
-                  example: 'Unauthorized'
+post:
+  summary: 'User Logout'
+  description: 'Clears authentication token from cookies.'
+  tags:
+    - Auth
+  security:
+    - BearerAuth: []
+  responses:
+    '200':
+      description: 'Logout successful'
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: 'Logout successful'
+    '401':
+      description: 'Unauthorized - No token provided'
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: 'Unauthorized'
