@@ -98,26 +98,35 @@ export const refreshUserController = async (req, res, next) => {
 
 export const logoutUser = async (req, res, next) => {
   try {
-    const token = req.get('Authorization')?.split(' ')[1]; // Token'i al
+    const accessToken = req.get('Authorization')?.split(' ')[1];
+    const refreshToken = req.cookies.refreshToken;
 
-    if (!token) {
+    if (!accessToken && !refreshToken) {
       return res
         .status(401)
-        .json({ message: 'Yetkilendirme hatası: Token bulunamadı' });
+        .json({ message: 'Authorization error: Token not found' });
     }
 
-    // Token'e bağlı session'ı bul
-    const session = await SessionCollection.findOne({ accessToken: token });
+    let session;
+    if (accessToken) {
+      session = await SessionCollection.findOne({ accessToken });
+    }
+
+    if (!session && refreshToken) {
+      session = await SessionCollection.findOne({ refreshToken });
+    }
 
     if (!session) {
       return res.status(404).json({ message: 'Session not found' });
     }
 
-    // Oturumu sil
     await SessionCollection.findByIdAndDelete(session._id);
 
-    res.status(200).json({ message: 'Başarıyla çıkış yapıldı!' });
+    res.clearCookie('refreshToken');
+    res.clearCookie('sessionId');
+
+    res.status(200).json({ message: 'Successfully logged out' });
   } catch (error) {
-    next(error);
+    next(createHttpError(500, error.message || 'Internal Server Error'));
   }
 };
