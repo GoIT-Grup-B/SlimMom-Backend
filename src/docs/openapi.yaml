@@ -31,7 +31,8 @@ paths:
   /logout:
     post:
       $ref: ../swagger/paths/auth/logout/post.yaml
-
+      tags:
+        - Auth
   /products/searchProducts:
     get:
       $ref: ../swagger/paths/products/get.yaml
