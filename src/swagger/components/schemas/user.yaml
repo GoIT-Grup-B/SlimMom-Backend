@@ -5,18 +5,18 @@ required:
   - password
 properties:
   _id:
-    description: "Student's id"
+    description: "User's id"
     type: string
     example: 65e4decdd286b30065d54af9
   name:
-    description: "Student's name"
+    description: "User's name"
     type: string
     example: 'John Doe'
   email:
-    description: "Student's email"
+    description: "User's email"
     type: string
     example: 'johndoe@gmail.com'
   password:
-    description: "Student's password"
+    description: "User's password"
     type: string
     example: '12345678'
