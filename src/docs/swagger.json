@@ -116,7 +116,7 @@
         "tags": [
           "Auth"
         ],
-        "summary": "Login user",
+        "summary": "Autherization operations",
         "operationId": "login",
         "description": "Login user",
         "security": [
@@ -468,12 +468,12 @@
         ],
         "summary": "Delete product by id for selected date",
         "description": "This endpoint allows user to delete product by id for selected date",
-        "operationId": "deleteUserProduct",
         "security": [
           {
             "bearerAuth": []
           }
         ],
+        "operationId": "deleteUserProduct",
         "parameters": [
           {
             "name": "productId",
