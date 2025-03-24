@@ -45,7 +45,6 @@ export const loginUser = async (payload) => {
   }
 
   const isEqual = await bcrypt.compare(payload.password, user.password);
-
   if (!isEqual) {
     throw createHttpError(401, 'Unauthorized');
   }
@@ -66,9 +65,15 @@ export const loginUser = async (payload) => {
     accessTokenValidUntil: new Date(Date.now() + FIFTEEN_MINUTES),
     refreshTokenValidUntil: new Date(Date.now() + ONE_DAY),
   });
-  console.log('Created session:', session);
 
-  return session;
+  // ✅ session ve user birlikte döndürülüyor
+  return {
+    ...session._doc, // session detayları
+    user: {
+      name: user.name,
+      email: user.email,
+    },
+  };
 };
 
 const createSession = () => {

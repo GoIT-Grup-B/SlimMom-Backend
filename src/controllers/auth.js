@@ -56,11 +56,19 @@ export const loginUserController = async (req, res) => {
     expires: new Date(Date.now() + ONE_DAY),
   });
 
+  // Kullanıcıyı çıkar
+  const user = session.user; // loginUser içinde populated edilmesi gerekiyor
+  const userInfo = {
+    name: user.name,
+    email: user.email,
+  };
+
   res.json({
     status: 200,
     message: 'Successfully logged in an user!',
     data: {
       accessToken: session.accessToken,
+      user: userInfo,
     },
   });
 };
