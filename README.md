@@ -4,7 +4,7 @@
 
 [![Static Badge](https://img.shields.io/badge/visit-SlimMom%20Swagger-%FF9D23?style=for-the-badge)](https://slimmom-backend-s8n8.onrender.com/api-docs/)
 
-## ![alt](https://downloader.disk.yandex.com/preview/062b3e9c427f014c40a07d074cdfeadeff7722d279a55f30965af3dae08e753c/67e2139e/UGqTOkRWQL2IpBuWkKjyJyO__MYD3--8XJpW1Qf1uaCzP5CH3E4GX5zew1_UG0uzFhw9uDJ9K9i2RF-8lTx4dA%3D%3D?uid=0&filename=2025-03-25_01-23-44.png&disposition=inline&hash=&limit=0&content_type=image%2Fpng&owner_uid=0&tknv=v2&size=2048x2048)
+## ![alt](./src/assets/Backend%20Readme.png)
 
 ## Projeye Genel Bakış
 
@@ -12,16 +12,15 @@ Slim Mom, kullanıcıların günlük kalori takibini yapmasına yardımcı olan 
 
 ## Proje Katkıda Bulunanlar
 
-| Ad Soyad           | GitHub Profili                                     | Rol                       |
-|:-------------------|:---------------------------------------------------|:--------------------------|
-| Heza GÖLCÜK        | [@Hezaarfenn](https://github.com/Hezaarfenn)       | Scrum Master - Developer  |
-| Gizem ÇOBAN        | [@gizemcobannnn](https://github.com/gizemcobannnn) | Team Leader - Developer   |
-| Şubat YÜCEL        | [@subatyucel](https://github.com/subatyucel)       | Developer                 |
-| Rojhat BALTA       | [@rojhatbalta](https://github.com/rojhatbalta)     | Developer                 |
-| Mete CİVELEK       | [@metlandus](https://github.com/metlandus)         | Developer                 |
-| Muhammet UZUNOĞLU  | [@Sailortr](https://github.com/Sailortr)           | Developer                 |
-| Murat ÇOLAK        | [@zipkaniar](https://github.com/zipkaniar)         | Developer                 |
-
+| Ad Soyad          | GitHub Profili                                     | Rol                      |
+| :---------------- | :------------------------------------------------- | :----------------------- |
+| Heza GÖLCÜK       | [@Hezaarfenn](https://github.com/Hezaarfenn)       | Scrum Master - Developer |
+| Gizem ÇOBAN       | [@gizemcobannnn](https://github.com/gizemcobannnn) | Team Leader - Developer  |
+| Şubat YÜCEL       | [@subatyucel](https://github.com/subatyucel)       | Developer                |
+| Rojhat BALTA      | [@rojhatbalta](https://github.com/rojhatbalta)     | Developer                |
+| Mete CİVELEK      | [@metlandus](https://github.com/metlandus)         | Developer                |
+| Muhammet UZUNOĞLU | [@Sailortr](https://github.com/Sailortr)           | Developer                |
+| Murat ÇOLAK       | [@zipkaniar](https://github.com/zipkaniar)         | Developer                |
 
 ## Özellikler
 
@@ -42,7 +41,7 @@ Slim Mom, kullanıcıların günlük kalori takibini yapmasına yardımcı olan 
 - **Swagger:** API uç noktalarını dökümante etmek için açık kaynaklı araç.
 - **dotenv:** Ortam değişkenleri ile güvenli yapılandırma yönetimi.
 - **Multer:** Kullanıcı tarafından yüklenen dosyaları işleme ve yönetme.
-- 
+-
 
 ## Backend Render Api Docs Link
 
@@ -50,7 +49,7 @@ https://slimmom-backend-s8n8.onrender.com/api-docs/
 
 ## Vercel Link
 
-https://slim-mom-frontend-five.vercel.app/ 
+https://slim-mom-frontend-five.vercel.app/
 
 ## Trello Link
 
