@@ -19,7 +19,7 @@ export const registerUserController = async (req, res, next) => {
     }
     const {createdUser,session} = await registerUser({ name, email, password });
 
-
+console.log(session);
     res.cookie('refreshToken', session.refreshToken, {
       httpOnly: true,
       expires: new Date(Date.now() + ONE_DAY),
@@ -108,8 +108,9 @@ export const logoutUser = async (req, res, next) => {
   try {
     const accessToken = req.get('Authorization')?.split(' ')[1];
     const refreshToken = req.cookies.refreshToken;
+    const sessionId = req.cookies.sessionId;
 
-    if (!accessToken && !refreshToken) {
+    if (!accessToken && !refreshToken && !sessionId) {
       return res
         .status(401)
         .json({ message: 'Authorization error: Token not found' });
