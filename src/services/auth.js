@@ -7,23 +7,9 @@ import { FIFTEEN_MINUTES, ONE_DAY } from '../constants/index.js';
 import mongoose from 'mongoose';
 import { randomBytes } from 'crypto';
 
-export const registerUser = async (payload) => {
-  try {
-    const user = await UserCollection.findOne({ email: payload.email });
-    if (user) throw createHttpError(409, 'email in use');
-    const encryptedPassword = await bcrypt.hash(payload.password, 10);
-    const createdUser = await UserCollection.create({
-      ...payload,
-      password: encryptedPassword,
-    });
-    return createdUser;
-  } catch (e) {
-    throw createHttpError(
-      e.status || 500,
-      e.message || 'Failed to create user',
-    );
-  }
-};
+const ACCESS_TOKEN_EXPIRY = '15m';
+
+const REFRESH_TOKEN_EXPIRY = '30d';
 
 export const getUser = async (email) => {
   try {
@@ -34,9 +20,42 @@ export const getUser = async (email) => {
   }
 };
 
-const ACCESS_TOKEN_EXPIRY = '15m';
 
-const REFRESH_TOKEN_EXPIRY = '30d';
+export const registerUser = async (payload) => {
+  try {
+    const user = await UserCollection.findOne({ email: payload.email });
+    if (user) throw createHttpError(409, 'email in use');
+    const encryptedPassword = await bcrypt.hash(payload.password, 10);
+    const createdUser = await UserCollection.create({
+      ...payload,
+      password: encryptedPassword,
+    });
+    const accessToken = jwt.sign({ userId: createdUser._id }, process.env.JWT_SECRET, {
+      expiresIn: ACCESS_TOKEN_EXPIRY,
+    });
+    const refreshToken = jwt.sign({ userId: createdUser._id }, process.env.JWT_SECRET, {
+      expiresIn: REFRESH_TOKEN_EXPIRY,
+    });
+  
+     const session= await SessionCollection.create({
+      userId: createdUser._id,
+      accessToken,
+      refreshToken,
+      accessTokenValidUntil: new Date(Date.now() + FIFTEEN_MINUTES),
+      refreshTokenValidUntil: new Date(Date.now() + ONE_DAY),
+    });
+
+    return {createdUser,session};
+  } catch (e) {
+    throw createHttpError(
+      e.status || 500,
+      e.message || 'Failed to create user',
+    );
+  }
+};
+
+
+
 
 export const loginUser = async (payload) => {
   const user = await UserCollection.findOne({ email: payload.email });

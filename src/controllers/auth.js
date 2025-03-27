@@ -17,13 +17,24 @@ export const registerUserController = async (req, res, next) => {
     if (user) {
       return next(createHttpError(409, 'Email in use'));
     }
+    const {createdUser,session} = await registerUser({ name, email, password });
 
-    const newUser = await registerUser({ name, email, password });
+
+    res.cookie('refreshToken', session.refreshToken, {
+      httpOnly: true,
+      expires: new Date(Date.now() + ONE_DAY),
+    });
+    res.cookie('sessionId', session._id, {
+      httpOnly: true,
+      expires: new Date(Date.now() + ONE_DAY),
+    });
+  
+
     // eslint-disable-next-line no-unused-vars
-    const {password:_,...userwithoutpass} = newUser.toObject();
+    const {password:_,...userwithoutpass} = createdUser.toObject();
 
 
-    const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, {
+    const token = jwt.sign({ id: createdUser._id }, process.env.JWT_SECRET, {
       expiresIn: '7d',
     });
 
@@ -32,7 +43,8 @@ export const registerUserController = async (req, res, next) => {
       message: 'Successfully registered a user!',
       data: {
         ...userwithoutpass,
-        accessToken:token
+        accessToken:token,
+        session:session
       }
     });
   } catch (error) {
