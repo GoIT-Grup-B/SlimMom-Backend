@@ -19,9 +19,9 @@ export const registerUserController = async (req, res, next) => {
     }
 
     const newUser = await registerUser({ name, email, password });
-    console.log(newUser);
-    const userwithoutpass = { ...newUser };
-    delete userwithoutpass.password;
+    // eslint-disable-next-line no-unused-vars
+    const {password:_,...userwithoutpass} = newUser.toObject();
+
 
     const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, {
       expiresIn: '7d',
@@ -31,13 +31,9 @@ export const registerUserController = async (req, res, next) => {
       status: 201,
       message: 'Successfully registered a user!',
       data: {
-        id: userwithoutpass._doc._id,
-        name: userwithoutpass._doc.name,
-        email: userwithoutpass._doc.email,
-        createdAt: userwithoutpass._doc.createdAt,
-        updatedAt: userwithoutpass._doc.updatedAt,
-      },
-      token,
+        ...userwithoutpass,
+        accessToken:token
+      }
     });
   } catch (error) {
     next(createHttpError(500, error));
