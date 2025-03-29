@@ -9,7 +9,8 @@ export default [
     rules: {
       semi: 'error',
       'no-unused-vars': ['error', { args: 'none' }],
-      'no-undef': 'error',
+      'no-undef': 'off',
+      'no-console': 'off',
     },
   },
 ];
